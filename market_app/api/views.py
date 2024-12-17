@@ -43,3 +43,13 @@ def market_single_view(request, pk):
         serializer = MarketSerializer(market)
         market.delete()
         return Response(serializer.data)
+
+
+@api_view(['GET', 'POST'])
+def sellers_view(request):
+    if request.method == 'GET':
+        markets = Seller.objects.all()
+        serializer = MarketSerializer(markets, many=True)
+        return Response(serializer.data)
+   
+    if request.method == 'POST':
